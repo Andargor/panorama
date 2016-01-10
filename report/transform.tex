@@ -1,7 +1,7 @@
 %File: transform.tex
 %Author: Yuxin Wu <ppwwyyxx@gmail.com>
 
-\subsection{Transformation}
+\section{Transformation}
 \label{sec:transform}
 
 For any two images taken from a camera at some fixed point,
@@ -23,7 +23,7 @@ and rotation aligned with the image plane (no skew),
 then they can be related by an affine matrix of the following form:
 \[ A = \begin{bmatrix} a_{11} &a_{12} & a_{13}\\ a_{21} & a_{22} & a_{23}\\ 0 & 0 & 1\end{bmatrix} \]
 
-% TODO solve
+
 \textbf{RANSAC} (Random Sample Consensus) algorithm\cite{ransac} is used to calculate a transformation matrix.
 In every iteration, several matched pairs is randomly chosen to calculate a best-fit transformation matrix,
 and the pairs which agree with the matrix are taken as inliers. It's implemented in \verb|stitch/transform_estimate.cc|.
@@ -31,13 +31,13 @@ and the pairs which agree with the matrix are taken as inliers. It's implemented
 Given a set of matches, affine and the first kind of homography transformation can be solved
 by least-squares fitting an over-determined linear system.
 The second kind of homography transformation can be solved by finding eigenvectors.
-These estimation are implemented in \verb|lib/imgproc.cc|.
+These estimation methods are implemented in \verb|lib/imgproc.cc|.
 
 After each matrix estimation, I performed
 a ``health check`` to the matrix,
 to avoid mal-formed transformation
 estimated from false matches.
-This includes two checks: (see \verb|stitch/transform.hh|)
+This includes two checks: (see \verb|stitch/homography.hh|)
 \begin{enumerate}
 
   \item  The skew factor in homography
@@ -49,6 +49,7 @@ This includes two checks: (see \verb|stitch/transform.hh|)
     or $y$ coordinate.
 \end{enumerate}
 
+% TODO overlap test
 For a matched pair of images,
 a confidence for this match
 is assigned by taking the ratio of inliers

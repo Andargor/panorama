@@ -1,9 +1,9 @@
 %File: cylinder.tex
 %Author: Yuxin Wu <ppwwyyxx@gmail.com>
 
-\subsection{Cylinder Mode}
+\section{Cylinder Mode}
 \label{sec:cylinder}
-\subsubsection{Necessity of Projection}
+\subsection{Necessity of Projection}
 If a rotational input is given, as most panoramas are built,
 using planar homography leads to \textbf{vertical distortion}, such as \figref{distort}.
 \begin{figure}[H]
@@ -23,7 +23,7 @@ transform estimation.
 These are the two modes used in this system. In this section we will
 introduce the algorithms used in cylinder mode.
 
-\subsubsection{Warp}
+\subsection{Warp}
 One way of doing this is to project each image
 to a cylinder surface at the beginning, by the following formula:
 
@@ -57,7 +57,7 @@ the ground is straightened.
   \caption{Stitching Result After Projection\label{fig:cyl}}
 \end{figure}
 
-\subsubsection{Straightening}
+\subsection{Straightening}
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{res/bend.jpg}

@@ -1,9 +1,9 @@
 %File: general.tex
 %Author: Yuxin Wu <ppwwyyxx@gmail.com>
 
-\subsection{Camera Estimation Mode}
+\section{Camera Estimation Mode}
 \label{sec:camera_estimate}
-\subsubsection{Intuition}
+\subsection{Intuition}
 The cylinder mode assume a known focal length and pure rotational panorama, to
 warp them on cylinder surface at the beginning.
 We want to get rid of these assumptions.
@@ -33,7 +33,7 @@ To overcome this problem, I estimated initial $K, R$ for each camera, from pairw
 Then, a global optimization is used to refine the parameters in $K, R$.
 Finally, pairwise homographies are rebuilt from our refined $K, R$.
 
-\subsubsection{Initial Estimation}
+\subsection{Initial Estimation}
 As suggested by \cite{focal}, focal length
 can be roughly estimated from pairwise homographies. This is implemented in \verb|stitch/camera.cc|.
 I used it to produce initial estimation of
@@ -61,7 +61,7 @@ of pairwise homographies, but the quality is not satisfactory.
   \caption{Initial guess of camera parameters}
 \end{figure}
 
-\subsubsection{Bundle Adjustment}
+\subsection{Bundle Adjustment}
 
 I implemented bundle adjustment in \verb|stitch/bundle_adjuster.cc|,
 to globally optimize all the camera parameters.
@@ -90,7 +90,7 @@ which sounds reasonable but I don't have time to implement that for now.
 Also, I think it'll also help to reject some matches if it is inconsistent with
 the current bundle.
 
-\subsubsection{Straightening}
+\subsection{Straightening}
 As suggested by \cite{panoramic-sift}, the result of bundle adjustment
 can have wavy effect, due to the unknown tilt angle.
 By assuming all cameras have their $X$ vectors lying on the same plane,

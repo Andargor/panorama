@@ -1,8 +1,7 @@
 %File: feature.tex
 %Author: Yuxin Wu <ppwwyyxx@gmail.com>
 
-\subsection{Feature Detection and Matching}
-\subsubsection{SIFT}
+\section{Feature Detection and Matching}
 Lowe's SIFT algorithm\cite{sift} is implemented in \verb|feature/*.cc|.
 The procedure of the algorithm and some results are briefly described as followed.
 \begin{enumerate}
@@ -18,7 +17,7 @@ The procedure of the algorithm and some results are briefly described as followe
     \end{figure}
 
     Feature is detected on different resized version of the original
-    image, to provide scale invariant feature.
+    image, to ensure scale invariant.
 
     The gaussian blur here is implemented by applying two 1-D convolutions, rather than
     a 2-D convolution. This speeds up the computation significantly.
@@ -112,29 +111,8 @@ The procedure of the algorithm and some results are briefly described as followe
       \caption{Matching Result\label{fig:match}}
     \end{figure}
 
-    To calculate Euclidean distance of two arrays, I used Intel SSE3 intrinsics to speed up.
-    KDTree could be used in the future to search for nearest neighbor.
-
-\end{enumerate}
-
-\subsubsection{BRIEF}
-BRIEF is a simple and robust descriptor, details can be seen in \cite{brief}.
-
-\begin{enumerate}
-  \item \textbf{Keypoint}
-
-    Keypoint localization in BRIEF feature can be done in different ways. I choosed to use the same routine as in SIFT feature.
-
-  \item \textbf{Descriptor Representation}(\verb|feature/brief.cc|)
-
-    BRIEF is computed by comparing 256 pairs of pixels around the keypoint. These pairs are pre-computed and fixed.
-    Therefore the result would be a bit vector of 256 length.
-
-  \item \textbf{Feature Matching}(\verb|feature/{match,feature}.cc|)
-
-    \textbf{Hamming Distance} is used to compare two bit vectors.
-    Similarly, a match is rejected if the distance to its nearest neighbor is similar to the distance to its second-nearest neighbor.
-    The hamming distance is implemented with gcc \verb|__builtin_popcount()| function to speed up.
+    I use FLANN library \cite{flann} to query 2-nearest-neighbor among feature vectors.
+    To calculate Euclidean distance of two vectors, Intel SSE3 intrinsics are used to speed up.
 
 \end{enumerate}
 

@@ -2,13 +2,12 @@
 % Date: Wed Jun 17 21:41:53 2015 +0800
 % Author: Yuxin Wu <ppwwyyxxc@gmail.com>
 
-\section{Algorithms}
 \input{feature}
 \input{transform}
 \input{cylinder}
 \input{general}
 
-\subsection{Blending}
+\section{Blending}
 The size of the final result is determined after having all the transformations.
 And the pixel value in the result image is calculated
 by an inverse transformation and bilinear interpolation with nearby pixels,
@@ -22,7 +21,7 @@ to get better result in panoramic image.
 The result is almost seamless. Compare \figref{unbend-persp} and \figref{general-straighten}
 to see the effect of blending.
 
-\subsection{Cropping}
+\section{Cropping}
 When the option \verb|CROP = 1| is set,
 the program simply manage to find a rectangular with largest area within the original result.
 
